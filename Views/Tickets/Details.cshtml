@@ -1,0 +1,56 @@
+﻿@model SisPark.Models.Ticket
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Vehiculo retirado</h2>
+
+<fieldset>
+    <legend>Ticket</legend>
+
+    <h4 class="display-label">
+         @Html.DisplayNameFor(model => model.Car.Patente)
+    </h4>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Car.Patente)
+    </div>
+
+    <h4 class="display-label">
+         Estado de Ticket
+    </h4>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TicketState.description)
+    </div>
+
+    <h4 class="display-label">
+         Dia y Hora comienzo
+    </h4>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartDateTime)
+    </div>
+
+    <h4 class="display-label">
+         Dia y Hora finalizado
+    </h4>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FinishDateTime)
+    </div>
+
+    <h4 class="display-label">
+         Tiempo Total
+    </h4>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalTime)
+    </div>
+
+    <h3 class="display-label">
+         Precio
+    </h3>
+    <h3 class="display-field">
+        @Html.DisplayFor(model => model.TotalPrice)
+    </h3>
+</fieldset>
+<p>
+    @Html.ActionLink("Volver", "Index")
+</p>

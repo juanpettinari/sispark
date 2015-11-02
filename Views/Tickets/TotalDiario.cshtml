@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "TotalDiario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TotalDiario</h2>
+
+
+@using (Html.BeginForm("TotalDiario","Tickets", FormMethod.Get))
+{
+    <p>
+        Fecha:<input type="date" name="fecha"/>
+        <input type="submit" value="Calcular" />
+    </p>
+    
+}
+<table>
+    <tr>
+        <th>
+            <div>
+                Usuario
+            </div>
+        </th>
+        <th>
+            <div>Dinero Cobrado</div>
+        </th>
+
+    </tr>
+    <tr>
+        <th>
+            <div>
+                @User.Identity.Name
+            </div>
+        </th>
+        <th>
+            <div> 
+                @String.Format("{0:f2}",ViewBag.total)
+            </div>
+        </th>
+    </tr>
+
+
+</table>
+
+<p>
+    @Html.ActionLink("Volver", "Index")
+</p>

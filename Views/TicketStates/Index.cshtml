@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SisPark.Models.TicketState>
+
+@{
+    ViewBag.Title = "Estado del Ticket";
+}
+
+<h2>Estado del Ticket</h2>
+
+<p>
+    @Html.ActionLink("Agregar", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Estado
+        </th>
+        <th>
+            Observación
+        </th>
+        <th>Acciones</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observacion)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.TicketStateId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SisPark.Models.UserLog>
+
+@{
+    ViewBag.Title = "Log de Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Log de Usuario</h2>
+
+
+@using (Html.BeginForm("Index", "UserLogs", FormMethod.Get))
+{
+    <p>
+        Accion: @Html.DropDownList("LogAccion", "")
+        Usuario: @Html.DropDownList("userseek", "")
+        
+    </p>
+    <p>
+        Fecha Desde:<input type="date" name="fechaDesde" /> 
+    </p>
+    <p>
+        Fecha Hasta:<input type="date" name="fechaHasta" />
+    </p>
+    <p>
+        <input type="submit" value="Filtrar" />
+    </p>
+}
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaYHora)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaYHora)
+            </td>
+        </tr>
+    }
+</table>

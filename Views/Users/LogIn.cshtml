@@ -1,0 +1,35 @@
+﻿@model  SisPark.Models.User
+
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LogIn</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Ha fallado el inicio de sesión, chequee los campos.");
+    <div>
+        <fieldset>
+            <legend>Login Form</legend>
+            <div>@Html.LabelFor(u => u.Usuario)</div>
+
+            <div>@Html.TextBoxFor(u => u.Usuario)
+            @Html.ValidationMessageFor(u => u.Usuario)</div>
+
+            <div>@Html.LabelFor(u => u.Clave)</div>
+
+            <div>
+                @Html.PasswordFor(u => u.Clave)
+                @Html.ValidationMessageFor(u => u.Clave)
+            </div>
+
+            <input type="submit" value="Aceptar" />
+        </fieldset>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

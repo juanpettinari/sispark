@@ -1,0 +1,73 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - SISPARK</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("Logo", "Index", new { controller = "Home" }, new { @class = "logo" })</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            @if (User.IsInRole("Administrador"))
+                            {
+                                <li>@Html.ActionLink("Ticket", "Index", "Tickets")</li>
+                                <li>@Html.ActionLink("Auto", "Index", "Cars")</li>
+                                <li>@Html.ActionLink("Tipo de Auto", "Index", "CarTypes")</li>
+                                <li>@Html.ActionLink("Usuario", "Index", "Users")</li>
+                                <li>@Html.ActionLink("Tipo de Usuario", "Index", "UserTypes")</li>
+                                <li>@Html.ActionLink("Estado del Ticket", "Index", "TicketStates")</li>
+                                <li>@Html.ActionLink("Log de Usuario", "Index", "UserLogs")</li>
+                                <li>@Html.ActionLink("Log de Ticket", "Index", "TicketLogs")</li>
+                                <li>@Html.ActionLink("Parametro", "Index", "Parameters")</li>
+                            }
+
+                            @if (User.IsInRole("App User"))
+                            {
+                                <li>@Html.ActionLink("Ticket", "Index", "Tickets")</li>
+                                <li>@Html.ActionLink("Auto", "Index", "Cars")</li>
+                            }
+                            
+                            @if (User.IsInRole("Auditor"))
+                            {
+                                <li>@Html.ActionLink("Log de Usuario", "Index", "UserLogs")</li>
+                                <li>@Html.ActionLink("Log de Ticket", "Index", "TicketLogs")</li>
+                                <li>@Html.ActionLink("Parametro", "Index", "Parameters")</li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - SISPARK</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

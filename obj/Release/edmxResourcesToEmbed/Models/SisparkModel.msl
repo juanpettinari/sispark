@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sisparkModelStoreContainer" CdmEntityContainer="sisparkEntities">
+    <EntitySetMapping Name="Car">
+      <EntityTypeMapping TypeName="sisparkModel.Car">
+        <MappingFragment StoreEntitySet="Car">
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Patente" ColumnName="Patente" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="TelCliente" ColumnName="TelCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarType">
+      <EntityTypeMapping TypeName="sisparkModel.CarType">
+        <MappingFragment StoreEntitySet="CarType">
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="tarifa" ColumnName="tarifa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parameters">
+      <EntityTypeMapping TypeName="sisparkModel.Parameters">
+        <MappingFragment StoreEntitySet="Parameters">
+          <ScalarProperty Name="ParametrosId" ColumnName="ParametrosId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ValorMinimo" ColumnName="ValorMinimo" />
+          <ScalarProperty Name="ValorMáximo" ColumnName="ValorMáximo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ticket">
+      <EntityTypeMapping TypeName="sisparkModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="TicketStateId" ColumnName="TicketStateId" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+          <ScalarProperty Name="FinishDateTime" ColumnName="FinishDateTime" />
+          <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketLog">
+      <EntityTypeMapping TypeName="sisparkModel.TicketLog">
+        <MappingFragment StoreEntitySet="TicketLog">
+          <ScalarProperty Name="TicketLogId" ColumnName="TicketLogId" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+          <ScalarProperty Name="DateTimeLog" ColumnName="DateTimeLog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketState">
+      <EntityTypeMapping TypeName="sisparkModel.TicketState">
+        <MappingFragment StoreEntitySet="TicketState">
+          <ScalarProperty Name="TicketStateId" ColumnName="TicketStateId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="observacion" ColumnName="observacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="sisparkModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="ClaveSalt" ColumnName="ClaveSalt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLog">
+      <EntityTypeMapping TypeName="sisparkModel.UserLog">
+        <MappingFragment StoreEntitySet="UserLog">
+          <ScalarProperty Name="UserLogId" ColumnName="UserLogId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Accion" ColumnName="Accion" />
+          <ScalarProperty Name="FechaYHora" ColumnName="FechaYHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usertype">
+      <EntityTypeMapping TypeName="sisparkModel.Usertype">
+        <MappingFragment StoreEntitySet="Usertype">
+          <ScalarProperty Name="usertypeid" ColumnName="usertypeid" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

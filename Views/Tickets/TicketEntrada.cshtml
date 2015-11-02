@@ -1,0 +1,39 @@
+﻿@model SisPark.Models.Ticket
+
+@{
+    ViewBag.Title = "Entrada Vehiculo";
+}
+
+<h2>Entrada Vehiculo</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Ticket</legend>
+        <h4>
+            @ViewBag.Mensaje
+        </h4>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CarId, "Auto")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CarId")
+            @Html.ValidationMessageFor(model => model.CarId)
+        </div>
+        <div>
+            @Html.ActionLink("Nuevo Vehiculo", "Create", "Cars")
+        </div>
+        <p>
+            <input type="submit" value="Guardar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

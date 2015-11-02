@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SisPark.Models.Parameters>
+
+@{
+    ViewBag.Title = "Parametros";
+}
+
+<h2>Parametros</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ParametrosId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorMinimo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorMáximo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParametrosId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorMinimo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorMáximo)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Borrar", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

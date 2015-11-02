@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sisparkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarTypeId" Type="Int32" />
+    <Property Name="Patente" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TelCliente" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarType" Relationship="Self.FK_Car_CarType" FromRole="Car" ToRole="CarType" />
+    <NavigationProperty Name="Ticket" Relationship="Self.FK_Ticket_Car" FromRole="Car" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="CarType">
+    <Key>
+      <PropertyRef Name="CarTypeId" />
+    </Key>
+    <Property Name="CarTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="tarifa" Type="Single" />
+    <NavigationProperty Name="Car" Relationship="Self.FK_Car_CarType" FromRole="CarType" ToRole="Car" />
+  </EntityType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="ParametrosId" />
+    </Key>
+    <Property Name="ParametrosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Valor" Type="Single" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="TicketStateId" Type="Int32" />
+    <Property Name="StartDateTime" Type="DateTime" Precision="3" />
+    <Property Name="FinishDateTime" Type="DateTime" Precision="3" />
+    <Property Name="TotalTime" Type="Single" />
+    <Property Name="TotalPrice" Type="Single" />
+    <NavigationProperty Name="Car" Relationship="Self.FK_Ticket_Car" FromRole="Ticket" ToRole="Car" />
+    <NavigationProperty Name="TicketState" Relationship="Self.FK_Ticket_TicketState" FromRole="Ticket" ToRole="TicketState" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Ticket_User" FromRole="Ticket" ToRole="User" />
+    <NavigationProperty Name="TicketLog" Relationship="Self.FK_TicketLog_Ticket" FromRole="Ticket" ToRole="TicketLog" />
+  </EntityType>
+  <EntityType Name="TicketLog">
+    <Key>
+      <PropertyRef Name="TicketLogId" />
+    </Key>
+    <Property Name="TicketLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketId" Type="Int32" />
+    <Property Name="TransactionTypeId" Type="Int32" />
+    <Property Name="DateTimeLog" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketLog_Ticket" FromRole="TicketLog" ToRole="Ticket" />
+    <NavigationProperty Name="TransactionType" Relationship="Self.FK_TicketLog_TransactionType" FromRole="TicketLog" ToRole="TransactionType" />
+  </EntityType>
+  <EntityType Name="TicketState">
+    <Key>
+      <PropertyRef Name="TicketStateId" />
+    </Key>
+    <Property Name="TicketStateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Ticket" Relationship="Self.FK_Ticket_TicketState" FromRole="TicketState" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="TransactionType">
+    <Key>
+      <PropertyRef Name="TransactionTypeId" />
+    </Key>
+    <Property Name="TransactionTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TicketLog" Relationship="Self.FK_TicketLog_TransactionType" FromRole="TransactionType" ToRole="TicketLog" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Telefono" Type="Int32" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Clave" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaveSalt" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Ticket" Relationship="Self.FK_Ticket_User" FromRole="User" ToRole="Ticket" />
+    <NavigationProperty Name="Usertype" Relationship="Self.FK_User_Usertype" FromRole="User" ToRole="Usertype" />
+  </EntityType>
+  <EntityType Name="Usertype">
+    <Key>
+      <PropertyRef Name="usertypeid" />
+    </Key>
+    <Property Name="usertypeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_Usertype" FromRole="Usertype" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Car_CarType">
+    <End Role="CarType" Type="Self.CarType" Multiplicity="0..1" />
+    <End Role="Car" Type="Self.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarType">
+        <PropertyRef Name="CarTypeId" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="CarTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Car">
+    <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_TicketState">
+    <End Role="TicketState" Type="Self.TicketState" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TicketState">
+        <PropertyRef Name="TicketStateId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="TicketStateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketLog_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="TicketLog" Type="Self.TicketLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketId" />
+      </Principal>
+      <Dependent Role="TicketLog">
+        <PropertyRef Name="TicketId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketLog_TransactionType">
+    <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="0..1" />
+    <End Role="TicketLog" Type="Self.TicketLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionType">
+        <PropertyRef Name="TransactionTypeId" />
+      </Principal>
+      <Dependent Role="TicketLog">
+        <PropertyRef Name="TransactionTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Usertype">
+    <End Role="Usertype" Type="Self.Usertype" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usertype">
+        <PropertyRef Name="usertypeid" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sisparkEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Car" EntityType="Self.Car" />
+    <EntitySet Name="CarType" EntityType="Self.CarType" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" />
+    <EntitySet Name="TicketLog" EntityType="Self.TicketLog" />
+    <EntitySet Name="TicketState" EntityType="Self.TicketState" />
+    <EntitySet Name="TransactionType" EntityType="Self.TransactionType" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="Usertype" EntityType="Self.Usertype" />
+    <AssociationSet Name="FK_Car_CarType" Association="Self.FK_Car_CarType">
+      <End Role="CarType" EntitySet="CarType" />
+      <End Role="Car" EntitySet="Car" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Car" Association="Self.FK_Ticket_Car">
+      <End Role="Car" EntitySet="Car" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_TicketState" Association="Self.FK_Ticket_TicketState">
+      <End Role="TicketState" EntitySet="TicketState" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_User" Association="Self.FK_Ticket_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketLog_Ticket" Association="Self.FK_TicketLog_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketLog" EntitySet="TicketLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketLog_TransactionType" Association="Self.FK_TicketLog_TransactionType">
+      <End Role="TransactionType" EntitySet="TransactionType" />
+      <End Role="TicketLog" EntitySet="TicketLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Usertype" Association="Self.FK_User_Usertype">
+      <End Role="Usertype" EntitySet="Usertype" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

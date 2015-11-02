@@ -1,0 +1,46 @@
+﻿@model SisPark.Models.TicketState
+
+@{
+    ViewBag.Title = "Agregar";
+}
+
+<h2>Agregar estado de ticket</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Estado de ticket</legend>
+
+        <div class="editor-label">
+            Descripción (*)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.observacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.observacion)
+            @Html.ValidationMessageFor(model => model.observacion)
+        </div>
+        <p>
+            (*)=Requerido
+        </p>
+        <p>
+            <input type="submit" value="Agregar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Volver a la Lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

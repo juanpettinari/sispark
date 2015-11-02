@@ -1,0 +1,40 @@
+﻿@model SisPark.Models.Usertype
+
+@{
+    ViewBag.Title = "Agregar tipo de usuario";
+}
+
+<h2>Agregar tipo de Usuario</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Tipo de Usuario</legend>
+
+        <div class="editor-label">
+            Descripción(*)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <p>
+            (*)=Requerido
+        </p>
+        <p>
+            
+            <input type="submit" value="Agregar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Volver a la Lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,5 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <strong>@Html.Encode(User.Identity.Name)</strong>
+    @Html.ActionLink("Cerrar Sesión", "LogOut", "Users")
+}

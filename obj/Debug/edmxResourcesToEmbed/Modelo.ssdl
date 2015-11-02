@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SisParkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarTypeId" Type="int" />
+    <Property Name="Patente" Type="nvarchar" MaxLength="6" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="NombreCliente" Type="nvarchar" MaxLength="50" />
+    <Property Name="TelCliente" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="CarType">
+    <Key>
+      <PropertyRef Name="CarTypeId" />
+    </Key>
+    <Property Name="CarTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="tarifa" Type="real" />
+  </EntityType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="ParametrosId" />
+    </Key>
+    <Property Name="ParametrosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="Valor" Type="real" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarId" Type="int" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="TicketStateId" Type="int" />
+    <Property Name="StartDateTime" Type="datetime" />
+    <Property Name="FinishDateTime" Type="datetime" />
+    <Property Name="TotalTime" Type="real" />
+    <Property Name="TotalPrice" Type="real" />
+  </EntityType>
+  <EntityType Name="TicketLog">
+    <Key>
+      <PropertyRef Name="TicketLogId" />
+    </Key>
+    <Property Name="TicketLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TicketId" Type="int" />
+    <Property Name="TransactionTypeId" Type="int" />
+    <Property Name="DateTimeLog" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TicketState">
+    <Key>
+      <PropertyRef Name="TicketStateId" />
+    </Key>
+    <Property Name="TicketStateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="observacion" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="TransactionType">
+    <Key>
+      <PropertyRef Name="TransactionTypeId" />
+    </Key>
+    <Property Name="TransactionTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserTypeId" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefono" Type="int" />
+    <Property Name="Usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Clave" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ClaveSalt" Type="nchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Usertype">
+    <Key>
+      <PropertyRef Name="usertypeid" />
+    </Key>
+    <Property Name="usertypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK_Car_CarType">
+    <End Role="CarType" Type="Self.CarType" Multiplicity="0..1" />
+    <End Role="Car" Type="Self.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarType">
+        <PropertyRef Name="CarTypeId" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="CarTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Car">
+    <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_TicketState">
+    <End Role="TicketState" Type="Self.TicketState" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TicketState">
+        <PropertyRef Name="TicketStateId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="TicketStateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketLog_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="TicketLog" Type="Self.TicketLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketId" />
+      </Principal>
+      <Dependent Role="TicketLog">
+        <PropertyRef Name="TicketId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketLog_TransactionType">
+    <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="0..1" />
+    <End Role="TicketLog" Type="Self.TicketLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionType">
+        <PropertyRef Name="TransactionTypeId" />
+      </Principal>
+      <Dependent Role="TicketLog">
+        <PropertyRef Name="TransactionTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Usertype">
+    <End Role="Usertype" Type="Self.Usertype" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usertype">
+        <PropertyRef Name="usertypeid" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SisParkModelStoreContainer">
+    <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarType" EntityType="Self.CarType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketLog" EntityType="Self.TicketLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketState" EntityType="Self.TicketState" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usertype" EntityType="Self.Usertype" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Car_CarType" Association="Self.FK_Car_CarType">
+      <End Role="CarType" EntitySet="CarType" />
+      <End Role="Car" EntitySet="Car" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Car" Association="Self.FK_Ticket_Car">
+      <End Role="Car" EntitySet="Car" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_TicketState" Association="Self.FK_Ticket_TicketState">
+      <End Role="TicketState" EntitySet="TicketState" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_User" Association="Self.FK_Ticket_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketLog_Ticket" Association="Self.FK_TicketLog_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketLog" EntitySet="TicketLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketLog_TransactionType" Association="Self.FK_TicketLog_TransactionType">
+      <End Role="TransactionType" EntitySet="TransactionType" />
+      <End Role="TicketLog" EntitySet="TicketLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Usertype" Association="Self.FK_User_Usertype">
+      <End Role="Usertype" EntitySet="Usertype" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

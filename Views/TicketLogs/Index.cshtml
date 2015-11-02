@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SisPark.Models.TicketLog>
+
+@{
+    ViewBag.Title = "Log de Ticket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Log de Ticket</h2>
+
+@using (Html.BeginForm("Index","TicketLogs", FormMethod.Get))
+{
+    <p>
+        Transacción: @Html.DropDownList("LogTransaccion","")
+        Usuario: @Html.DropDownList("userseek","")
+        Patente: @Html.DropDownList("patenteseek","")
+    </p>
+    <p>
+        Fecha Desde:<input type="date" name="fechaDesde" />
+    </p>
+    <p>
+        Fecha Hasta:<input type="date" name="fechaHasta" />
+    </p>
+    <p>
+        <input type="submit" value="Filtrar" />
+    </p>
+}
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ticket.Car.Patente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeLog)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ticket.Car.Patente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransactionType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTimeLog)
+        </td>
+    </tr>
+}
+</table>

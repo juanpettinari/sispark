@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SisPark.Models.User>
+
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<h2>Usuarios</h2>
+
+<p>
+    @Html.ActionLink("Registrar nuevo usuario", "Registration")
+</p>
+<table>
+    <tr>
+        <th>
+            Tipo de Usuario
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Apellido
+        </th>
+        <th>
+            Telefono
+        </th>
+        <th>
+            Usuario
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usertype.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.UserId })
+        </td>
+    </tr>
+}
+
+</table>

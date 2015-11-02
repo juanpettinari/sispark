@@ -1,0 +1,47 @@
+﻿@model SisPark.Models.Parameters
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Estás seguro que querés eliminar esto?</h3>
+<fieldset>
+    <legend>Parameters</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ParametrosId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ParametrosId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValorMinimo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValorMinimo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValorMáximo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValorMáximo)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Eliminar" /> |
+        @Html.ActionLink("Volver a la Lista", "Index")
+    </p>
+}

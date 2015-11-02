@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SisPark.Models.Car>
+
+@{
+    ViewBag.Title = "Autos";
+}
+
+<h2>Autos</h2>
+
+<p>
+    @Html.ActionLink("Agregar Vehículo", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Tipo de Auto
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patente)
+        </th>
+        <th>
+            Descripción
+        </th>
+        <th>
+            Nombre del Cliente
+        </th>
+        <th>
+            Telefono del Cliente
+        </th>
+        <th>Acción</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarType.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelCliente)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.CarId })
+        </td>
+    </tr>
+}
+
+</table>

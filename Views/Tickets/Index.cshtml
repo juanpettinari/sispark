@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SisPark.Models.Ticket>
+
+@{
+    ViewBag.Title = "Ticket";
+}
+
+<h2>Ticket</h2>
+
+<h3>
+    @Html.ActionLink("Ingresar vehiculo", "TicketEntrada") |
+    @Html.ActionLink("Retirar vehiculo", "RetirarCoche") |
+    @Html.ActionLink("Cancelar Ticket", "CancelarTicket")|
+    @Html.ActionLink("Cierre de Caja", "TotalDiario")
+</h3>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SisPark.Models.CarType>
+
+@{
+    ViewBag.Title = "Tipos de Auto";
+}
+
+<h2>Tipos de Auto</h2>
+
+<p>
+    @Html.ActionLink("Nuevo tipo de Auto", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Tipo
+        </th>
+        <th>
+            Tarifa
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tarifa)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.CarTypeId })
+        </td>
+    </tr>
+}
+
+</table>

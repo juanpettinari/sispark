@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SisPark.Models.Ticket>
+
+@{
+    ViewBag.Title = "Cancelar Ticket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cancelar Ticket</h2>
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Patente)
+        </th>
+        <th>
+            Estado de Ticket
+        </th>
+        <th>
+            Comienzo estadía
+        </th>
+        <th>
+            Acción
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.Patente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketState.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDateTime)
+            </td>
+            <td>
+                @Html.ActionLink("Cancelar", "TicketCancelado", new { id = item.TicketId })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Volver", "Index")
+</p>
